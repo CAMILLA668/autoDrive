@@ -63,4 +63,24 @@ class VeiculoTest extends TestCase
             'id' => $marca->id,
         ]);
     }
+
+    public function testa_busca_de_veiculo_por_modelo() {
+        $marcas = Marca::create([
+            'nome' => 'Toyota'
+        ]);
+
+        Veiculo::create([
+            'marca_id' => $marcas->id,
+            'modelo'   => 'Corolla',
+            'ano'      => 2020,
+            'preco'    => 97000.00,
+            'status'   => 'disponivel',
+         ]);
+
+        $response = $this->get('/veiculos?busca=Corolla');
+
+        $response->assertStatus(200)
+            ->assertSee('Corolla')
+            ->assertDontSee('Tyota');
+    }
 }

@@ -81,6 +81,6 @@ class VeiculoTest extends TestCase
 
         $response->assertStatus(200)
             ->assertSee('Corolla')
-            ->assertDontSee('Tyota');
+            ->assertDontSee('Civic');
     }
 }
